@@ -1,32 +1,44 @@
 import { useState } from "react";
 
-export default function NumberPicker(): JSX.Element {
-  const [counterValueFromCurrentRender, queueRerenderWithNewCounterValue] =
-    useState(0);
-  const [favouriteValueFromCurrentRender, queueRerenderWithNewFavouriteValue] =
-    useState(0);
+export default function EmojiPicker(): JSX.Element {
+  const [EmojiFromCurrentRender, queueRerenderWithNewEmoji] =
+  useState<string>();
 
-  const handleAddOneToCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender + 1);
+  const [favouriteEmojiFromCurrentRender, queueRerenderWithNewFavouriteEmoji] =
+    useState<string>();
+
+
+  const handlePickFoxEmoji = () => {
+    queueRerenderWithNewEmoji("🦊");
   };
 
-  const handleSubtractOneFromCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender - 1);
+  const handlePickUniEmoji = () => {
+    queueRerenderWithNewEmoji("🦄");
   };
 
-  const handleStoreCurrentCount = () => {
-    queueRerenderWithNewFavouriteValue(counterValueFromCurrentRender);
+  const handlePickFrogEmoji = () => {
+    queueRerenderWithNewEmoji("🐸");
+  };
+  const handlePickMonkeyEmoji = () => {
+    queueRerenderWithNewEmoji("🐒");
+  };
+
+  const handleStoreCurrentEmoji = () => {
+    queueRerenderWithNewFavouriteEmoji(EmojiFromCurrentRender);
   };
 
   return (
     <>
-      <h1>Number picker</h1>
-      <p>Your stored number: {favouriteValueFromCurrentRender}</p>
-      <p>Counter: {counterValueFromCurrentRender}</p>
-      <button onClick={handleSubtractOneFromCounter}>-1</button>
-      <button onClick={handleAddOneToCounter}>+1</button>
+      <h1>Emoji Picker</h1>
+      <p>Your stored emoji: {favouriteEmojiFromCurrentRender}</p>
+      <p>Your current emoji: {EmojiFromCurrentRender}</p>
+      <button onClick={handlePickUniEmoji}>🦄</button>
+      <button onClick={handlePickFoxEmoji}>🦊</button> 
+      <button onClick={handlePickFrogEmoji}>🐸</button> 
+      <button onClick={handlePickMonkeyEmoji}>🐒</button> 
+
       <hr />
-      <button onClick={handleStoreCurrentCount}>Store current count</button>
+      <button onClick={handleStoreCurrentEmoji}>Store current emoji</button>
     </>
   );
 }
