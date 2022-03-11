@@ -1,37 +1,46 @@
 import { useState } from "react";
 
 export default function EmojiPicker(): JSX.Element {
-  const [EmojiFromCurrentRender, queueRerenderWithNewEmoji] =
-  useState<string>();
+  const [currentEmoji, queueNewEmoji] =
+  useState<string>('');
 
-  const [favouriteEmojiFromCurrentRender, queueRerenderWithNewFavouriteEmoji] =
-    useState<string>();
+  const [storedEmojis, queueStoredEmoji] =
+    useState<string[]>([]);
 
 
   const handlePickFoxEmoji = () => {
-    queueRerenderWithNewEmoji("🦊");
+    queueNewEmoji("🦊");
   };
 
   const handlePickUniEmoji = () => {
-    queueRerenderWithNewEmoji("🦄");
+    queueNewEmoji("🦄");
   };
 
   const handlePickFrogEmoji = () => {
-    queueRerenderWithNewEmoji("🐸");
+    queueNewEmoji("🐸");
   };
   const handlePickMonkeyEmoji = () => {
-    queueRerenderWithNewEmoji("🐒");
+    queueNewEmoji("🐒");
   };
 
   const handleStoreCurrentEmoji = () => {
-    queueRerenderWithNewFavouriteEmoji(EmojiFromCurrentRender);
+    queueStoredEmoji([...storedEmojis, currentEmoji]);
   };
+
+  const listItems= storedEmojis.map((emoji,index)=>(
+    <li key={index}>{emoji}</li>
+  ));
+  console.log(listItems)
 
   return (
     <>
       <h1>Emoji Picker</h1>
-      <p>Your stored emoji: {favouriteEmojiFromCurrentRender}</p>
-      <p>Your current emoji: {EmojiFromCurrentRender}</p>
+      <p>Your recent emojis: 
+        <ul>
+          {listItems.slice(-5)}
+        </ul>
+      </p>
+      <p>Your current emoji: {currentEmoji}</p>
       <button onClick={handlePickUniEmoji}>🦄</button>
       <button onClick={handlePickFoxEmoji}>🦊</button> 
       <button onClick={handlePickFrogEmoji}>🐸</button> 
